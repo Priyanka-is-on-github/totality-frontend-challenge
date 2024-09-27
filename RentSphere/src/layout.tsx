@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
       <main className="  h-screen">{children}</main>
 
-      <Footer/>
+      {/* <Footer/> */}
 
     </div>
   );

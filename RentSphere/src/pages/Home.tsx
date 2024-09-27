@@ -14,7 +14,7 @@ import {
 import Filter from '../_components/Filter'
 import Property from "../_components/Property";
 
-import { Box  } from '@mui/material'
+import { Box, Typography  } from '@mui/material'
 export default function Home() {
   const plugin = React.useRef(
     Autoplay({ delay: 7000, stopOnInteraction: true })
@@ -101,8 +101,8 @@ export default function Home() {
         
       </div>
 
-<div className="border-2 border-red-600 flex flex-col justify-center">
-  <h1>Recent Property Listed</h1>
+<div className=" mt-6 text-sky-700 flex flex-col justify-center items-center">
+<Typography variant='h1' id="heading1"  sx={{fontSize:'25px', fontWeight:'bold', padding:'25px',  }}>Recent Property List</Typography> 
 <Property/>
 </div>
 

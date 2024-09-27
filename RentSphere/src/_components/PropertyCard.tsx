@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import location from '../utils/location';
+import { Button } from '../components/ui/button';
 
 interface CourseCardProps {
     id: string;
@@ -46,6 +47,7 @@ interface CourseCardProps {
             </div>
           </div>
 
+         <Button className='bg-sky-800' >Book </Button>
          
         </div>
       </div>
