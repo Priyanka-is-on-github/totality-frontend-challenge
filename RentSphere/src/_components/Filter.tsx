@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 
 // import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import {
@@ -13,9 +13,33 @@ import {
   } from "../components/ui/dropdown-menu"
   import { Button } from "../components/ui/button"
 import { FilterIcon, ListFilterIcon, SearchIcon } from 'lucide-react'
+
 function Filter() {
-    const [position, setPosition] = React.useState("bottom")
+  const [filters, setFilters] = useState({
+    location: '',
+    minPrice: '',
+    maxPrice: '',
+    bedrooms: '',
+    amenities: '',
+  });
+
+   
+console.log('filter=', filters)
+    
+
+    const handleChange = (e: { target: { name: any; value: any } }) => {
+      const { name, value } = e.target;
+      setFilters((prev) => ({ ...prev, [name]: value }));
+    };
+  
+    // const handleSubmit = (e: { preventDefault: () => void }) => {
+    //   e.preventDefault();
+    //   onFilterSortChange(filters);
+    // };
+
+
   return (
+
     <>
    
 
@@ -24,79 +48,71 @@ function Filter() {
  
  
  <Typography variant='h1' id="heading1"  sx={{fontSize:{xs:"50px", lg:"50px"}, color:'white', fontWeight:'bold'}}>Effortless Home Rentals for Every Journey</Typography> 
- <Typography  variant='h5' id="heading" sx={{fontSize:{xs:"25px", lg:"20px"},  color:'skyblue',fontWeight:'bold'}}>Find new and featuskyblue property located in your local city</Typography>
+ <Typography  variant='h5' id="heading" sx={{fontSize:{xs:"25px", lg:"20px"},  color:'skyblue',fontWeight:'bold'}}>Find new and features property located in your local city</Typography>
  </Box>
+
+ <form action="">
    
     <Box sx={{position:"absolute", inset:0, margin:"auto" , width:"85%", height:{xs:"50%", lg:"20%", sm:"20%"}, bgcolor:"transparent", borderRadius:4 , display:"flex", alignItems:"center", justifyContent:"center" , marginTop:{xs:'30rem', lg:'20rem'}}}> 
-      <Box sx={{ width:"95%" , display:"flex", border:"5px solid skyblue", backgroundColor:'white',flexWrap:"wrap" , flexDirection:{xs:"column" , sm:"row", lg:"row"}}} id="detail">  
+      <Box sx={{ width:"95%" , display:"flex", border:"5px solid skyblue", backgroundColor:'white',flexWrap:"wrap" , flexDirection:{xs:"column" , sm:"row", lg:"row"}, padding:'6px'}} id="detail">  
 
            <Box sx={{ flex:"1" }}> 
-            <p className='para'>Search your Destination:</p>
-            <input type="text"  id='destination' placeholder='Enter name here' />    
+            <p className='font-semibold'>Search your Location:</p>
+            <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        value={filters.location}
+        onChange={handleChange}
+      />
            </Box>
 
           
 
            <Box sx={{flex:"1",  }}>
-            <p className='para'>Max Price</p>
-            <div  className='inpt inptrange'>
-            <input type="range"  id='price' placeholder='Enter Price' /> 
+            <p className='font-semibold'> Price</p>
+            <div  className='flex gap-x-1 '>
+            <input type="number"  id='price' placeholder='Min' onChange={handleChange} name='minPrice' value={filters.minPrice}/> 
+            <input type="number"  id='price' placeholder='Max' onChange={handleChange} name='maxPrice 'value={filters.maxPrice}/> 
+           
             </div>
          
            </Box>
 
-           <Box sx={{flex:"1", }}>
-           <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">Number of bedrooms</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="1">1</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="2">2</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="3">3</DropdownMenuRadioItem>
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-         
+           <Box sx={{flex:"1", paddingLeft:'5px'}}>
+            <h6 className='font-semibold'>Number of Bedrooms</h6>
+           <select name="bedrooms" value={filters.bedrooms} onChange={handleChange} >
+        <option value="">Number of bedrooms</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
            </Box>
           
 
            <Box sx={{flex:"1", }}>
-           <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">Amenities</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="1">AC</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="2">Wi-fi</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="3">swimming pool</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="3">Garden</DropdownMenuRadioItem>
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+            <h6 className='font-semibold'>Amenities</h6>
+           <select name="amenities" value={filters.amenities} onChange={handleChange} className='text-slate'>
+        <option value="">Amenities</option>
+        <option value="AC">AC</option>
+        <option value="Wi-Fi">Wi-Fi</option>
+        <option value="Garden">Garden</option>
+        <option value="Swimming Pool">Swimming Pool</option>
+      </select>
          
            </Box>
 
            <Box sx={{padding:'3px', paddingTop:'5px'}}>
-          <SearchIcon/>
+           <button type="submit"> 
+            <SearchIcon/>Apply Filters</button>
 
 
            </Box>
 
            
 
-           {/* <Button
-                variant="contained"
-                sx={{ position:"absolute",padding: "10px 40px", borderRadius: 10, fontWeight: 700, whiteSpace:"nowrap", top:"87%" , left:"43%"}} 
-              >
-               More Filter
-              </Button> */}
+         
            
       </Box>
           
@@ -104,7 +120,7 @@ function Filter() {
 
          </Box> 
         
-      
+         </form>  
         </>
   )
 }
