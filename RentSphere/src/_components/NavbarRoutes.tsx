@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from "react";
+import { ReactNode, useContext } from "react";
 import {
   SignedIn,
   SignedOut,
@@ -8,8 +8,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import "../App.css";
 import Logo from "./Logo";
-import { Button } from "../components/ui/button";
-import { CartItemsContext } from "../App";
+import { CartItemsContext } from "../utils/Context";
 
 type Navlinks = {
   name: string;
@@ -40,8 +39,7 @@ const navLinks: Navlinks[] = [
 ];
 
 function Navbar() {
-  
-const {cartItems} = useContext(CartItemsContext)
+  const { cartItems } = useContext(CartItemsContext);
   const { pathname } = useLocation();
   return (
     <>
@@ -88,7 +86,6 @@ const {cartItems} = useContext(CartItemsContext)
                       : ""
                   }`}
               >
-                
                 <span className="mr-2 text-sm bg-sky-700 text-white p-2 rounded-full">
                   {cartItems.length}
                 </span>
