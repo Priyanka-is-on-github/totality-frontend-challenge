@@ -1,31 +1,18 @@
-import  Layout  from '../layout'
-import React from 'react'
-import propertyCardsData from '../assets/PropertyCardsData'
-import { Link } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
-import { Typography } from '@mui/material'
-import PropertyCard from '../_components/PropertyCard'
+import Layout from "../layout";
 
-
-interface PropertyCardProps {
-  id: number;
-  title: string;
-  image: string;
-  description: string;
-  price: number;
-  location: string;
-  bedrooms: number;
-  type: string;
-}
+import propertyCardsData from "../assets/PropertyCardsData";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import { Typography } from "@mui/material";
+import PropertyCard from "../_components/PropertyCard";
+import { PropertyCardProps } from "../utils/Types";
 
 function Property() {
   return (
-    
-<Layout>
-<div className="mt-20">
+    <Layout>
+      <div className="mt-20">
         <div className=" w-full flex ">
           <Link to="/">
-           
             <p className="p-6">
               <ArrowLeft />
             </p>
@@ -49,29 +36,29 @@ function Property() {
             <p className="text-center">No properties found</p>
           ) : (
             propertyCardsData.map((property: PropertyCardProps) => (
-              <div data-aos="fade-up"
-              data-aos-duration="3000">
-              <PropertyCard
-                key={property.id} // Always provide a unique key when mapping
-                id={property.id}
-                title={property.title}
-                image={property.image}
-                description={property.description}
-                price={property.price}
-                location={property.location}
-                bedrooms={property.bedrooms}
-                type={property.type}
-              />
-
-</div>
+              <div
+                data-aos="fade-up"
+                data-aos-duration="3000"
+                key={property.id}
+              >
+                <PropertyCard
+                  key={property.id} // Always provide a unique key when mapping
+                  id={property.id}
+                  title={property.title}
+                  image={property.image}
+                  description={property.description}
+                  price={property.price}
+                  location={property.location}
+                  bedrooms={property.bedrooms}
+                  type={property.type}
+                />
+              </div>
             ))
           )}
         </div>
       </div>
-
-</Layout>
-
-  )
+    </Layout>
+  );
 }
 
-export default Property
+export default Property;

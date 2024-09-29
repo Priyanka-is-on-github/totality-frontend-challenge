@@ -1,47 +1,44 @@
-import { Button } from "../components/ui/button";
 import * as React from "react";
 import Layout from "../layout";
 import Autoplay from "embla-carousel-autoplay";
 
-import {  Card, CardContent } from "../components/ui/card";
+import { Card, CardContent } from "../components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "../components/ui/carousel";
 import Filter from "../_components/Filter";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Cards from "../_components/Cards";
 export default function Home() {
   const plugin = React.useRef(
     Autoplay({ delay: 7000, stopOnInteraction: true })
   );
 
-  const propertyCards = [
-    {
-      icon: "src/assets/images1/1",
-      property_name: "House & Villa",
-      number_of_property: "213 Property",
-    },
-    {
-      icon: "src/assets/images1/2",
-      property_name: "House & Villa",
-      number_of_property: "213 Property",
-    },
-    {
-      icon: "src/assets/images1/3",
-      property_name: "House & Villa",
-      number_of_property: "213 Property",
-    },
-    {
-      icon: "src/assets/images1/4",
-      property_name: "House & Villa",
-      number_of_property: "213 Property",
-    },
-  ];
+  // const propertyCards = [
+  //   {
+  //     icon: "src/assets/images1/1",
+  //     property_name: "House & Villa",
+  //     number_of_property: "213 Property",
+  //   },
+  //   {
+  //     icon: "src/assets/images1/2",
+  //     property_name: "House & Villa",
+  //     number_of_property: "213 Property",
+  //   },
+  //   {
+  //     icon: "src/assets/images1/3",
+  //     property_name: "House & Villa",
+  //     number_of_property: "213 Property",
+  //   },
+  //   {
+  //     icon: "src/assets/images1/4",
+  //     property_name: "House & Villa",
+  //     number_of_property: "213 Property",
+  //   },
+  // ];
   const images = [
     "src/assets/images/1.jpg",
     "src/assets/images/2.jpg",
@@ -51,11 +48,11 @@ export default function Home() {
   ];
   return (
     <Layout>
-      <div>
-        <div className="relative h-screen border-2 border-green-950">
+      <>
+        <div className="relative ">
           <Carousel
             plugins={[plugin.current]}
-            className="w-full h-screen absolute"
+            className="w-full "
             onMouseLeave={plugin.current.reset}
           >
             <CarouselContent>
@@ -108,11 +105,8 @@ export default function Home() {
           <Filter />
         </div>
 
-
-<Cards/>
-
-        
-      </div>
+        <Cards />
+      </>
     </Layout>
   );
 }

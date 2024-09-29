@@ -20,8 +20,9 @@ import {
   AlertDialogTrigger,
 } from "../components/ui/alert-dialog";
 import { Input } from "../components/ui/input";
-import { CartItemsContext } from "../App";
+
 import toast from "react-hot-toast";
+import { CartItemsContext } from "../utils/Context";
 
 interface CourseCardProps {
   id: number;
@@ -78,13 +79,14 @@ function PropertyCard({
       return [...prev, newCartItem];
     });
 
-    toast.success(
-      "Booking successful! Check cart. "
-    );
+    toast.success("Booking successful! Check cart. ");
   };
 
   return (
-    <div className="group transition overflow-hidden border rounded-lg p-4 hover:shadow-lg bg-white hover:bg-sky-50 h-full ">
+    <div
+      key={id}
+      className="group transition overflow-hidden border rounded-lg p-4 hover:shadow-lg bg-white hover:bg-sky-50 h-full "
+    >
       {/* Image and Bookmark Icon */}
       <div className="relative w-full aspect-video rounded-md overflow-hidden ">
         <Box

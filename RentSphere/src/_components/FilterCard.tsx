@@ -1,10 +1,10 @@
 import Layout from "../layout";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import PropertyCard from "./PropertyCard";
-import { FilterContext } from "../App";
 import { Typography } from "@mui/material";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { FilterContext } from "../utils/Context";
 
 interface PropertyCardProps {
   id: number;
@@ -18,15 +18,13 @@ interface PropertyCardProps {
 }
 
 function FilterCard() {
-  const { filteredProperties, setFilteredProperties } =
-    useContext(FilterContext);
+  const { filteredProperties } = useContext(FilterContext);
 
   return (
     <Layout>
-      <div className="mt-20 ">
+      <div className=" ">
         <div className=" w-full flex ">
           <Link to="/">
-           
             <p className="p-6">
               <ArrowLeft />
             </p>
@@ -45,7 +43,7 @@ function FilterCard() {
             Filter Property
           </Typography>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-9 border-4 border-blue-800 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-9 ">
           {filteredProperties.length === 0 ? (
             <p className="text-center">No properties match your filters.</p>
           ) : (
