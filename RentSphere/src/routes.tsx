@@ -2,9 +2,11 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import About from "./pages/About";
-import Pricing from "./pages/Pricing"; 
 import Error from "./pages/Error"; 
 import { createBrowserRouter } from "react-router-dom";
+import Cart from "./pages/Cart";
+import Property from "./pages/Property";
+import FilterCard from "./_components/FilterCard";
 
 export const router = createBrowserRouter([
     {
@@ -28,8 +30,19 @@ export const router = createBrowserRouter([
         errorElement:<Error/>
     },
     {
-        path:'/Pricing',
-        element:<Pricing/>,
+        path:'/Properties',
+        element:<Property/>,
         errorElement:<Error/>
     },
+    {
+        path:'/Cart',
+        element:<Cart/>,
+        errorElement:<Error/>
+    },
+    {
+        path:'/FilterCard',
+        element:<FilterCard/>,
+        errorElement:<Error/>
+    },
+
 ])

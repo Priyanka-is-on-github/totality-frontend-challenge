@@ -3,7 +3,7 @@ import * as React from "react";
 import Layout from "../layout";
 import Autoplay from "embla-carousel-autoplay";
 
-import { Card, CardContent } from "../components/ui/card";
+import {  Card, CardContent } from "../components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -11,38 +11,37 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../components/ui/carousel";
-import Filter from '../_components/Filter'
-import Property from "../_components/Property";
+import Filter from "../_components/Filter";
 
-import { Box, Typography  } from '@mui/material'
+import { Box, Typography } from "@mui/material";
+import Cards from "../_components/Cards";
 export default function Home() {
   const plugin = React.useRef(
     Autoplay({ delay: 7000, stopOnInteraction: true })
   );
 
-  const propertyCards=[
+  const propertyCards = [
     {
-      icon:'src/assets/images1/1',
-      property_name:'House & Villa',
-      number_of_property:'213 Property',
+      icon: "src/assets/images1/1",
+      property_name: "House & Villa",
+      number_of_property: "213 Property",
     },
     {
-      icon:'src/assets/images1/2',
-      property_name:'House & Villa',
-      number_of_property:'213 Property',
+      icon: "src/assets/images1/2",
+      property_name: "House & Villa",
+      number_of_property: "213 Property",
     },
     {
-      icon:'src/assets/images1/3',
-      property_name:'House & Villa',
-      number_of_property:'213 Property',
+      icon: "src/assets/images1/3",
+      property_name: "House & Villa",
+      number_of_property: "213 Property",
     },
     {
-      icon:'src/assets/images1/4',
-      property_name:'House & Villa',
-      number_of_property:'213 Property',
+      icon: "src/assets/images1/4",
+      property_name: "House & Villa",
+      number_of_property: "213 Property",
     },
-
-  ]
+  ];
   const images = [
     "src/assets/images/1.jpg",
     "src/assets/images/2.jpg",
@@ -52,12 +51,8 @@ export default function Home() {
   ];
   return (
     <Layout>
-    <div>
-     
-      <div className="relative h-screen">
-
-     
-
+      <div>
+        <div className="relative h-screen border-2 border-green-950">
           <Carousel
             plugins={[plugin.current]}
             className="w-full h-screen absolute"
@@ -69,17 +64,16 @@ export default function Home() {
                   <div className=" h-screen">
                     <Card className="h-full">
                       <CardContent className="flex h-full items-center justify-center relative ">
-                      <Box  sx={{
-              bgcolor: "black",
-              height: { xs: "97vh", lg: "97%" },
-              width: "97%",
-              position: "absolute",
-              opacity: "0.3",
-              zIndex: 10,
-             
-            }}
-         
-          />
+                        <Box
+                          sx={{
+                            bgcolor: "black",
+                            height: { xs: "97vh", lg: "97%" },
+                            width: "97%",
+                            position: "absolute",
+                            opacity: "0.6",
+                            zIndex: 10,
+                          }}
+                        />
                         <img
                           src={src}
                           alt={`Carousel item ${index + 1}`}
@@ -93,20 +87,31 @@ export default function Home() {
             </CarouselContent>
           </Carousel>
 
-
-       
-
+          <Box
+            id="head"
+            sx={{
+              position: "absolute",
+              backgroundColor: "transparent",
+              width: "80%",
+              top: "27%",
+              left: "10%",
+            }}
+          >
+            <h1 className="text-3xl md:text-5xl font-bold text-center text-white">
+              Effortlessly Find Your Dream Home Luxury Villas and Homes for Rent
+            </h1>
+            <h1 className="text-xl md:text-lg font-bold text-center  pt-3 text-slate-400">
+              Discover a Seamless Rental Experience with Personalized Service
+            </h1>
+          </Box>
 
           <Filter />
+        </div>
+
+
+<Cards/>
+
         
-      </div>
-
-<div className=" mt-6 text-sky-700 flex flex-col justify-center items-center">
-<Typography variant='h1' id="heading1"  sx={{fontSize:'25px', fontWeight:'bold', padding:'25px',  }}>Recent Property List</Typography> 
-<Property/>
-</div>
-
-
       </div>
     </Layout>
   );

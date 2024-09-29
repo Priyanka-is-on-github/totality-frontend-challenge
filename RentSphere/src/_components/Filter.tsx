@@ -1,128 +1,141 @@
-import { Box, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from "react";
+import { Button } from "../components/ui/button"; // Assuming Shadcn components are available
+import { Input } from "../components/ui/input"; // Assuming Shadcn components are available
+import { Checkbox } from "../components/ui/checkbox"; // Assuming Shadcn components are available
+import { Card } from "../components/ui/card"; // Assuming Shadcn components are available
+import { Slider } from "../components/ui/slider"; // Assuming Shadcn components are available
+import PropertyCardsData from "../assets/PropertyCardsData";
+import PropertyCard from "./PropertyCard";
+import { Navigate, useNavigate } from "react-router";
 
-// import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "../components/ui/dropdown-menu"
-  import { Button } from "../components/ui/button"
-import { FilterIcon, ListFilterIcon, SearchIcon } from 'lucide-react'
+import { FilterContext } from "../App";
+import toast from "react-hot-toast";
 
-function Filter() {
-  const [filters, setFilters] = useState({
-    location: '',
-    minPrice: '',
-    maxPrice: '',
-    bedrooms: '',
-    amenities: '',
-  });
-
-   
-console.log('filter=', filters)
-    
-
-    const handleChange = (e: { target: { name: any; value: any } }) => {
-      const { name, value } = e.target;
-      setFilters((prev) => ({ ...prev, [name]: value }));
-    };
-  
-    // const handleSubmit = (e: { preventDefault: () => void }) => {
-    //   e.preventDefault();
-    //   onFilterSortChange(filters);
-    // };
-
-
-  return (
-
-    <>
-   
-
-   
- <Box id="head" sx={{ position:"absolute",backgroundColor:"transparent", height:"10vh" , width:"80%", top:"27%", left:"10%",}}>    
- 
- 
- <Typography variant='h1' id="heading1"  sx={{fontSize:{xs:"50px", lg:"50px"}, color:'white', fontWeight:'bold'}}>Effortless Home Rentals for Every Journey</Typography> 
- <Typography  variant='h5' id="heading" sx={{fontSize:{xs:"25px", lg:"20px"},  color:'skyblue',fontWeight:'bold'}}>Find new and features property located in your local city</Typography>
- </Box>
-
- <form action="">
-   
-    <Box sx={{position:"absolute", inset:0, margin:"auto" , width:"85%", height:{xs:"50%", lg:"20%", sm:"20%"}, bgcolor:"transparent", borderRadius:4 , display:"flex", alignItems:"center", justifyContent:"center" , marginTop:{xs:'30rem', lg:'20rem'}}}> 
-      <Box sx={{ width:"95%" , display:"flex", border:"5px solid skyblue", backgroundColor:'white',flexWrap:"wrap" , flexDirection:{xs:"column" , sm:"row", lg:"row"}, padding:'6px'}} id="detail">  
-
-           <Box sx={{ flex:"1" }}> 
-            <p className='font-semibold'>Search your Location:</p>
-            <input
-        type="text"
-        name="location"
-        placeholder="Location"
-        value={filters.location}
-        onChange={handleChange}
-      />
-           </Box>
-
-          
-
-           <Box sx={{flex:"1",  }}>
-            <p className='font-semibold'> Price</p>
-            <div  className='flex gap-x-1 '>
-            <input type="number"  id='price' placeholder='Min' onChange={handleChange} name='minPrice' value={filters.minPrice}/> 
-            <input type="number"  id='price' placeholder='Max' onChange={handleChange} name='maxPrice 'value={filters.maxPrice}/> 
-           
-            </div>
-         
-           </Box>
-
-           <Box sx={{flex:"1", paddingLeft:'5px'}}>
-            <h6 className='font-semibold'>Number of Bedrooms</h6>
-           <select name="bedrooms" value={filters.bedrooms} onChange={handleChange} >
-        <option value="">Number of bedrooms</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-           </Box>
-          
-
-           <Box sx={{flex:"1", }}>
-            <h6 className='font-semibold'>Amenities</h6>
-           <select name="amenities" value={filters.amenities} onChange={handleChange} className='text-slate'>
-        <option value="">Amenities</option>
-        <option value="AC">AC</option>
-        <option value="Wi-Fi">Wi-Fi</option>
-        <option value="Garden">Garden</option>
-        <option value="Swimming Pool">Swimming Pool</option>
-      </select>
-         
-           </Box>
-
-           <Box sx={{padding:'3px', paddingTop:'5px'}}>
-           <button type="submit"> 
-            <SearchIcon/>Apply Filters</button>
-
-
-           </Box>
-
-           
-
-         
-           
-      </Box>
-          
-       
-
-         </Box> 
-        
-         </form>  
-        </>
-  )
+interface PropertyCardProps {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  price: number;
+  location: string;
+  bedrooms: number;
+  type: string;
 }
 
-export default Filter
+
+
+
+
+
+const Filter = () => {
+
+  const navigate = useNavigate();
+
+  // const [filteredProperties, setFilteredProperties] =
+  //   useState<PropertyCardProps[]>(PropertyCardsData);
+
+  const { filteredProperties, setFilteredProperties } =
+  useContext(FilterContext);
+
+
+  const [location, setLocation] = useState<string>("");
+  const [priceRange, setPriceRange] = useState<number[]>([10000, 50000]);
+  const [bedrooms, setBedrooms] = useState<number>(1);
+  const [selectedPropertyType, setSelectedPropertyType] = useState<string>("");
+
+  const handleFilter = () => {
+
+    if (!location && priceRange[0] === 10000 && priceRange[1] === 50000 && bedrooms === 1 && !selectedPropertyType) {
+      toast.error("Please provide at least one filter value before applying the filters.");
+      return; // Exit the function if no inputs are provided
+    }
+
+    const filtered = PropertyCardsData.filter((property) => {
+
+      return (
+        (location === "" ||
+          property.location.toLowerCase().includes(location.toLowerCase())) &&
+        property.price >= priceRange[0] &&
+        property.price <= priceRange[1] &&
+        property.bedrooms >= bedrooms &&
+        (selectedPropertyType === "" || property.type === selectedPropertyType)
+      );
+    });
+  
+    setFilteredProperties(filtered);
+    navigate("/FilterCard");
+   
+  };
+
+  return (
+ 
+
+      <div className="p-6 absolute top-[55%] left-[10%] w-[80%] flex flex-col items-center ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6   ">
+
+          <div className="max-w-xs mx-auto  ">
+            <select
+              id="propertyType"
+              value={selectedPropertyType}
+              onChange={(e) => setSelectedPropertyType(e.target.value)}
+              className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm "
+            >
+              <option value="" disabled>
+                -- Choose Property Type --
+              </option>
+              <option value="house">House</option>
+              <option value="villa">Villa</option>
+              <option value="apartment">Apartment</option>
+              <option value="flat">Flat</option>
+              <option value="office">Office</option>
+              <option value="building">Building</option>
+            </select>
+          </div>
+
+          <div className="flex flex-col">
+            <Input
+              value={location}
+              onChange={(e: any) => setLocation(e.target.value)}
+              placeholder="type location"
+              className="block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white"
+            />
+          </div>
+
+          <div className="flex flex-col ">
+            <Slider
+              value={priceRange}
+              min={5000}
+              max={100000}
+              step={500}
+              onValueChange={(value: any) => setPriceRange(value)}
+              className="w-full bg-white"
+            />
+            <div className="flex justify-between mt-2 text-sm text-white">
+              <span>₹{priceRange[0]}</span>
+              <span>₹{priceRange[1]}</span>
+            </div>
+          </div>
+
+          {/* Bedrooms Filter */}
+          <div className="flex flex-col">
+            <Input
+              type="number"
+              value={bedrooms}
+              onChange={(e: any) => setBedrooms(parseInt(e.target.value))}
+              placeholder="Number of bedrooms"
+              className=" w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-white"
+            />
+          </div>
+        </div>
+
+        {/* Apply Filters Button */}
+        <Button onClick={handleFilter} className="mb-6 bg-sky-800 mt-4">
+          Apply Filters
+        </Button>
+
+      </div>
+  
+  );
+};
+
+export default Filter;

@@ -19,8 +19,8 @@ type Navlinks = {
       link: "/Services",
     },
     {
-      name: "Pricing",
-      link: "/Pricing",
+      name: "Properties",
+      link: "/Properties",
     },
   
     {
