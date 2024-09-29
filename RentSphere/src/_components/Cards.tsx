@@ -1,24 +1,28 @@
 const PropertyType = [
   {
-    image: "src/assets/images1/1.png",
+    image:
+      "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/1.png",
 
     type: "House & Villa",
     number: "234 Property",
   },
   {
-    image: "src/assets/images1/2.png",
+    image:
+      "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/2.png",
 
     type: "Family House",
     number: "265 Property",
   },
   {
-    image: "src/assets/images1/3.png",
+    image:
+      "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/3.png",
 
     type: "Apartment",
     number: "123 Property",
   },
   {
-    image: "src/assets/images1/4.png",
+    image:
+      "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/4.png",
 
     type: "Office & Studio",
     number: "321 Property",

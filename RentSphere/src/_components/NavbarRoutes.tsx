@@ -45,7 +45,10 @@ function Navbar() {
     <>
       <div className=" h-full  flex items-center   w-[80%] m-auto   md:justify-between ">
         <div className="   hidden md:flex">
-          <img src="src/assets/home.png" alt="home" />
+          <img
+            src="https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/home.png"
+            alt="home"
+          />
 
           <div className="p-2">
             <Logo />
