@@ -40,11 +40,11 @@ export default function Home() {
   //   },
   // ];
   const images = [
-    "src/assets/images/1.jpg",
-    "src/assets/images/2.jpg",
-    "src/assets/images/3.jpg",
-    "src/assets/images/4.jpg",
-    "src/assets/images/5.jpg",
+    "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/1.jpg",
+    "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/2.jpg",
+    "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/3.jpg",
+    "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/4.jpg",
+    "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/5.jpg",
   ];
   return (
     <Layout>

@@ -6,18 +6,21 @@ const services = [
     title: "Web Development",
     description:
       "Build responsive, fast, and secure websites using modern web technologies.",
-    image: "src/assets/service_images/webdev.jpg",
+    image:
+      "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/webdev.jpg",
   },
   {
     title: "Mobile Development",
     description:
       "Develop high-performance mobile apps with an excellent user experience.",
-    image: "src/assets/service_images/mobiledev.jpg",
+    image:
+      "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/mobiledev.jpg",
   },
   {
     title: "UI/UX Design",
     description: "Design beautiful, intuitive, and user-centered interfaces.",
-    image: "src/assets/service_images/ui.jpg",
+    image:
+      "https://nwlpefucbqtzejxlijey.supabase.co/storage/v1/object/public/RentSphere/ui.jpg",
   },
 ];
 
